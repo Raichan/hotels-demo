@@ -19,18 +19,22 @@ const Hotels = () => {
 
   return (
     <div>
-      <select>
-        <option value="" />
-        {locations.map((location) => {
-          return <option key={location}>{location}</option>;
+      <header>
+        <select>
+          <option value="" />
+          {locations.map((location) => {
+            return <option key={location}>{location}</option>;
+          })}
+        </select>
+        <input type="checkbox" /> Is available
+      </header>
+      <main>
+        {hotelList.map((hotel) => {
+          return (
+            <HotelInfo key={hotel.id} hotel={hotel} showReserveButton={true} />
+          );
         })}
-      </select>
-      <input type="checkbox" /> Is available
-      {hotelList.map((hotel) => {
-        return (
-          <HotelInfo key={hotel.id} hotel={hotel} showReserveButton={true} />
-        );
-      })}
+      </main>
     </div>
   );
 };

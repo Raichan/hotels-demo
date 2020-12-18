@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import NumberFormat from "react-number-format";
 
 const HotelInfo = ({ hotel, showReserveButton }) => {
   const ReserveButton = () => {
@@ -21,7 +22,14 @@ const HotelInfo = ({ hotel, showReserveButton }) => {
         <br />
         Swimming pool: {hotel.hasSwimmingPool ? "Yes" : "No"}
         <br />
-        {hotel.price}
+        <NumberFormat
+          value={hotel.price}
+          displayType={"text"}
+          decimalScale={2}
+          fixedDecimalScale={true}
+          decimalSeparator={","}
+          suffix={" €"}
+        />
         <br />
         {showReserveButton ? <ReserveButton /> : ""}
       </p>
