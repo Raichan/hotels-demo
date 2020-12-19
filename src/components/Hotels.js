@@ -1,9 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { countries } from "country-data";
+import {
+  InputLabel,
+  Select,
+  MenuItem,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 import HotelInfo from "./HotelInfo.js";
 import jsonData from "../hotels.json";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() => ({
+  locationFilter: {
+    color: "primary",
+    width: "200px",
+  },
+  leftMargin: {
+    marginLeft: "0px",
+  },
+}));
 
 const Hotels = () => {
+  const classes = useStyles();
   const [hotelList, setHotelList] = useState(jsonData);
   const [locations, setLocations] = useState([]);
   const [filterResults, setFilterResults] = useState(hotelList);
@@ -38,17 +57,30 @@ const Hotels = () => {
   return (
     <div>
       <header>
-        <select onChange={(e) => setLocationFilter(e.target.value)}>
-          <option value="" />
+        <InputLabel id="location-filter">Filter by country</InputLabel>
+        <Select
+          labelId="location-filter"
+          id="select"
+          onChange={(e) => setLocationFilter(e.target.value)}
+          className={classes.locationFilter}
+        >
+          <MenuItem value=""> </MenuItem>
           {locations.map((location) => {
-            return <option key={location}>{location}</option>;
+            return (
+              <MenuItem key={location} value={location}>
+                {location}
+              </MenuItem>
+            );
           })}
-        </select>
-        <input
-          type="checkbox"
+        </Select>
+        <FormControlLabel
+          value={showAvailableOnly}
+          control={<Checkbox color="primary" />}
+          label="Is available"
+          labelPlacement="end"
           onChange={(e) => setShowAvailableOnly(e.target.checked)}
-        />{" "}
-        Is available
+          className={classes.leftMargin}
+        />
       </header>
       <main>
         {filterResults.map((hotel) => {
