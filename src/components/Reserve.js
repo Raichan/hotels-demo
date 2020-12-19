@@ -10,6 +10,7 @@ import {
   InputLabel,
   Input,
   Card,
+  Typography,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -18,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
   },
   successInfo: {
     backgroundColor: "#e1ffe8",
+  },
+  title: {
+    marginBottom: "10px",
   },
 }));
 
@@ -39,8 +43,10 @@ const Reserve = ({ match }) => {
   const Confirmation = () => {
     return (
       <Card className={classes.successInfo}>
-        <h4>Hotel reserved successfully!</h4>
-        <p>
+        <Typography variant="body1" className={classes.title}>
+          Hotel reserved successfully!
+        </Typography>
+        <Typography variant="body2">
           <em>Reservation details:</em>
           <br />
           Name: {name}
@@ -52,8 +58,7 @@ const Reserve = ({ match }) => {
           Date of departure: {departure}
           <br />
           hotels.net may send newsletters by email: {newsletter ? "Yes" : "No"}
-          <br />
-        </p>
+        </Typography>
       </Card>
     );
   };
@@ -63,7 +68,9 @@ const Reserve = ({ match }) => {
       <HotelInfo hotel={hotel} showReserveButton={false} />
       <Card className={classes.reservationForm}>
         <form onSubmit={handleSubmit}>
-          <h3>Reserve hotel</h3>
+          <Typography variant="body1" className={classes.title}>
+            Reserve hotel
+          </Typography>
           <FormControl fullWidth>
             <InputLabel htmlFor="name">Name</InputLabel>
             <Input
@@ -107,7 +114,11 @@ const Reserve = ({ match }) => {
           <FormControlLabel
             value={newsletter}
             control={<Checkbox color="primary" />}
-            label="hotels.net may send newsletters by email"
+            label={
+              <Typography variant="body2">
+                hotels.net may send newsletters by email
+              </Typography>
+            }
             labelPlacement="end"
             onChange={(e) => setNewsletter(e.target.checked)}
           />

@@ -9,7 +9,7 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: "Helvetica",
   },
-  shape: {},
+  shape: { borderRadius: 0 },
   overrides: {
     MuiCard: {
       root: {
@@ -31,8 +31,16 @@ const theme = createMuiTheme({
         borderRadius: 30,
       },
     },
+    MuiMenuItem: {
+      root: {
+        height: "36px",
+      },
+    },
   },
   props: {
+    MuiCard: {
+      elevation: 0,
+    },
     MuiButton: {
       variant: "contained",
       color: "secondary",

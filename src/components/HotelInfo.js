@@ -40,9 +40,9 @@ const HotelInfo = ({ hotel, showReserveButton }) => {
 
   const ReserveButton = () => {
     return (
-      <Link to={`/reserve/${hotel.id}`}>
-        <Button>View deal</Button>
-      </Link>
+      <Button component={Link} to={`/reserve/${hotel.id}`}>
+        View deal
+      </Button>
     );
   };
 

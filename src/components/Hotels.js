@@ -6,6 +6,7 @@ import {
   MenuItem,
   FormControlLabel,
   Checkbox,
+  Typography,
 } from "@material-ui/core";
 import HotelInfo from "./HotelInfo.js";
 import jsonData from "../hotels.json";
@@ -76,7 +77,7 @@ const Hotels = () => {
         <FormControlLabel
           value={showAvailableOnly}
           control={<Checkbox color="primary" />}
-          label="Is available"
+          label={<Typography variant="body2">Is available</Typography>}
           labelPlacement="end"
           onChange={(e) => setShowAvailableOnly(e.target.checked)}
           className={classes.leftMargin}
