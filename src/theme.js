@@ -18,14 +18,6 @@ const theme = createMuiTheme({
         padding: "10px",
       },
     },
-    MuiCardContent: {
-      root: {
-        padding: "0 0 0 10px",
-        "&:last-child": {
-          paddingBottom: 0,
-        },
-      },
-    },
     MuiButton: {
       root: {
         borderRadius: 30,

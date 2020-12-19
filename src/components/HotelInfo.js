@@ -1,29 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import NumberFormat from "react-number-format";
-import {
-  Button,
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
-} from "@material-ui/core";
+import { Button, Card, CardMedia, Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() => ({
-  hotelCard: {
-    display: "flex",
-  },
+const useStyles = makeStyles((theme) => ({
   hotelImage: {
     width: "100px",
     height: "100px",
   },
+  hotelInfoLeft: {
+    marginLeft: "10px",
+  },
   hotelInfoRight: {
     marginLeft: "auto",
-    display: "flex",
-    flexDirection: "column",
     justifyContent: "space-between",
-    textAlign: "right",
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "column",
+      alignItems: "flex-end",
+    },
   },
 }));
 
@@ -47,36 +42,42 @@ const HotelInfo = ({ hotel, showReserveButton }) => {
   };
 
   return (
-    <Card className={classes.hotelCard}>
-      <CardMedia
-        image={handleImageUrl(hotel.imageUrl)}
-        className={classes.hotelImage}
-      />
-      <CardContent className="hotelinfo-left">
-        <Typography variant="body1">{hotel.name}</Typography>
-        <Typography variant="body2">
-          {`${hotel.city}, ${hotel.country}`}
-        </Typography>
-        <br />
-        <Typography variant="body2">
-          Available: {hotel.isAvailable ? "Yes" : "No"}
-          <br />
-          Swimming pool: {hotel.hasSwimmingPool ? "Yes" : "No"}
-        </Typography>
-      </CardContent>
-      <CardContent className={classes.hotelInfoRight}>
-        <Typography variant="h6" color="primary">
-          <NumberFormat
-            value={hotel.price}
-            displayType={"text"}
-            decimalScale={2}
-            fixedDecimalScale={true}
-            decimalSeparator={","}
-            suffix={" €"}
+    <Card>
+      <Grid container>
+        <Grid item>
+          <CardMedia
+            image={handleImageUrl(hotel.imageUrl)}
+            className={classes.hotelImage}
           />
-        </Typography>
-        {showReserveButton ? <ReserveButton /> : ""}
-      </CardContent>
+        </Grid>
+        <Grid item className={classes.hotelInfoLeft}>
+          <Typography variant="body1">{hotel.name}</Typography>
+          <Typography variant="body2">
+            {`${hotel.city}, ${hotel.country}`}
+          </Typography>
+          <br />
+          <Typography variant="body2">
+            Available: {hotel.isAvailable ? "Yes" : "No"}
+            <br />
+            Swimming pool: {hotel.hasSwimmingPool ? "Yes" : "No"}
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={3} container className={classes.hotelInfoRight}>
+          <Grid item>
+            <Typography variant="h6" color="primary">
+              <NumberFormat
+                value={hotel.price}
+                displayType={"text"}
+                decimalScale={2}
+                fixedDecimalScale={true}
+                decimalSeparator={","}
+                suffix={" €"}
+              />
+            </Typography>
+          </Grid>
+          <Grid item>{showReserveButton ? <ReserveButton /> : ""}</Grid>
+        </Grid>
+      </Grid>
     </Card>
   );
 };
