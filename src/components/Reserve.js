@@ -33,11 +33,13 @@ const Reserve = ({ match }) => {
   const [arrival, setArrival] = useState("");
   const [departure, setDeparture] = useState("");
   const [newsletter, setNewsletter] = useState(false);
-  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [sentData, setSentData] = useState({});
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setShowConfirmation(true);
+    const payload = { name, telephone, arrival, departure, newsletter };
+    // Making an imaginary POST request here
+    setSentData(payload);
   };
 
   const Confirmation = () => {
@@ -49,15 +51,16 @@ const Reserve = ({ match }) => {
         <Typography variant="body2">
           <em>Reservation details:</em>
           <br />
-          Name: {name}
+          Name: {sentData.name}
           <br />
-          Telephone: {telephone}
+          Telephone: {sentData.telephone}
           <br />
-          Date of arrival: {arrival}
+          Date of arrival: {sentData.arrival}
           <br />
-          Date of departure: {departure}
+          Date of departure: {sentData.departure}
           <br />
-          hotels.net may send newsletters by email: {newsletter ? "Yes" : "No"}
+          hotels.net may send newsletters by email:{" "}
+          {sentData.newsletter ? "Yes" : "No"}
         </Typography>
       </Card>
     );
@@ -126,7 +129,7 @@ const Reserve = ({ match }) => {
           <Button type="submit">Reserve hotel</Button>
         </form>
       </Card>
-      {showConfirmation ? <Confirmation /> : ""}
+      {Object.keys(sentData).length !== 0 ? <Confirmation /> : ""}
     </main>
   );
 };
