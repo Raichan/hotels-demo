@@ -28,6 +28,11 @@ const theme = createMuiTheme({
         height: "36px",
       },
     },
+    MuiInputBase: {
+      input: {
+        fontSize: "14px",
+      },
+    },
   },
   props: {
     MuiCard: {
