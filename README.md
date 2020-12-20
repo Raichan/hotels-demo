@@ -2,7 +2,7 @@
 
 A simple version of a hotel reservation website. You can browse a list of hotels, filter them by location and availability, and make a reservation by filling out a form.
 
-Created with React.
+Created with React and Material-UI.
 
 ## Installation
 
@@ -15,4 +15,4 @@ npm start
 
 ## Running demo site
 
-Coming soon.
+https://hotels-demo.web.app/
