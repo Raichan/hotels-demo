@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
       alignItems: "flex-end",
     },
   },
+  price: {
+    color: "#3E6922",
+  },
 }));
 
 const HotelInfo = ({ hotel, showReserveButton }) => {
@@ -64,7 +67,7 @@ const HotelInfo = ({ hotel, showReserveButton }) => {
         </Grid>
         <Grid item xs={12} sm={3} container className={classes.hotelInfoRight}>
           <Grid item>
-            <Typography variant="h6" color="primary">
+            <Typography variant="h6" className={classes.price}>
               <NumberFormat
                 value={hotel.price}
                 displayType={"text"}
