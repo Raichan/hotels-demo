@@ -12,6 +12,12 @@ import {
   Card,
   Typography,
 } from "@material-ui/core";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
+import { startOfToday, startOfTomorrow, format } from "date-fns";
 
 const useStyles = makeStyles((theme) => ({
   reservationForm: {
@@ -20,9 +26,6 @@ const useStyles = makeStyles((theme) => ({
   successInfo: {
     backgroundColor: "#e1ffe8",
   },
-  title: {
-    marginBottom: "10px",
-  },
 }));
 
 const Reserve = ({ match }) => {
@@ -30,8 +33,10 @@ const Reserve = ({ match }) => {
   const hotel = jsonData.find((hotel) => hotel.id === match.params.id);
   const [name, setName] = useState("");
   const [telephone, setTelephone] = useState("");
-  const [arrival, setArrival] = useState("");
-  const [departure, setDeparture] = useState("");
+  const [arrival, setArrival] = useState(format(startOfToday(), "yyyy-MM-dd"));
+  const [departure, setDeparture] = useState(
+    format(startOfTomorrow(), "yyyy-MM-dd")
+  );
   const [newsletter, setNewsletter] = useState(false);
   const [sentData, setSentData] = useState({});
 
@@ -45,7 +50,7 @@ const Reserve = ({ match }) => {
   const Confirmation = () => {
     return (
       <Card className={classes.successInfo}>
-        <Typography variant="body1" className={classes.title}>
+        <Typography variant="body1" gutterBottom>
           Hotel reserved successfully!
         </Typography>
         <Typography variant="body2">
@@ -71,10 +76,8 @@ const Reserve = ({ match }) => {
       <HotelInfo hotel={hotel} showReserveButton={false} />
       <Card className={classes.reservationForm}>
         <form onSubmit={handleSubmit}>
-          <Typography variant="body1" className={classes.title}>
-            Reserve hotel
-          </Typography>
-          <FormControl fullWidth>
+          <Typography variant="body1">Reserve hotel</Typography>
+          <FormControl fullWidth margin="dense">
             <InputLabel htmlFor="name">Name</InputLabel>
             <Input
               id="name"
@@ -83,7 +86,7 @@ const Reserve = ({ match }) => {
             />
           </FormControl>
           <br />
-          <FormControl fullWidth>
+          <FormControl fullWidth margin="dense">
             <InputLabel htmlFor="telephone">Telephone</InputLabel>
             <Input
               id="telephone"
@@ -93,25 +96,41 @@ const Reserve = ({ match }) => {
           </FormControl>
           <br />
           <FormControl fullWidth>
-            <InputLabel htmlFor="date-of-arrival">Date of arrival</InputLabel>
-            <Input
-              id="date-of-arrival"
-              type="date"
-              value={arrival}
-              onChange={(e) => setArrival(e.target.value)}
-            />
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                disableToolbar
+                variant="inline"
+                format="yyyy-MM-dd"
+                margin="dense"
+                id="date-of-arrival"
+                label="Date of arrival"
+                value={arrival}
+                onChange={(date) => setArrival(date)}
+                autoOk={true}
+                KeyboardButtonProps={{
+                  "aria-label": "Date of arrival",
+                }}
+              />
+            </MuiPickersUtilsProvider>
           </FormControl>
           <br />
           <FormControl fullWidth>
-            <InputLabel htmlFor="date-of-departure">
-              Date of departure
-            </InputLabel>
-            <Input
-              id="date-of-departure"
-              type="date"
-              value={departure}
-              onChange={(e) => setDeparture(e.target.value)}
-            />
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                disableToolbar
+                variant="inline"
+                format="yyyy-MM-dd"
+                margin="dense"
+                id="date-picker-inline"
+                label="Date of departure"
+                value={departure}
+                onChange={(date) => setDeparture(date)}
+                autoOk={true}
+                KeyboardButtonProps={{
+                  "aria-label": "Date of departure",
+                }}
+              />
+            </MuiPickersUtilsProvider>
           </FormControl>
           <br />
           <FormControlLabel

@@ -62,6 +62,7 @@ const Hotels = () => {
         <Select
           labelId="location-filter"
           id="select"
+          value={locationFilter}
           onChange={(e) => setLocationFilter(e.target.value)}
           className={classes.locationFilter}
         >
