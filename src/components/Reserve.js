@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { countries } from "country-data";
 import HotelInfo from "./HotelInfo.js";
 import jsonData from "../hotels.json";
 import { makeStyles } from "@material-ui/core/styles";
@@ -36,8 +37,21 @@ const useStyles = makeStyles(() => ({
 
 const Reserve = ({ match }) => {
   const classes = useStyles();
-  const hotel = jsonData.find((hotel) => hotel.id === match.params.id);
-  const [sentData, setSentData] = useState({});
+  const [hotel, setHotel] = useState({});
+  const [sentData, setSentData] = useState();
+
+  useEffect(() => {
+    let newHotel = jsonData.find((hotel) => hotel.id === match.params.id);
+    if (newHotel) {
+      if (!newHotel.country) {
+        newHotel.country = countries[newHotel.countryCode].name;
+      }
+      if (newHotel.imageUrl[0] === ".") {
+        newHotel.imageUrl = newHotel.imageUrl.slice(1);
+      }
+      setHotel(newHotel);
+    }
+  }, [match.params.id]);
 
   const formik = useFormik({
     initialValues: {
@@ -192,7 +206,7 @@ const Reserve = ({ match }) => {
         </form>
       </Card>
 
-      {Object.keys(sentData).length !== 0 ? <Confirmation /> : ""}
+      {sentData ? <Confirmation /> : ""}
     </main>
   );
 };

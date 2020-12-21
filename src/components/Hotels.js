@@ -24,15 +24,15 @@ const useStyles = makeStyles(() => ({
 
 const Hotels = () => {
   const classes = useStyles();
-  const [hotelList, setHotelList] = useState(jsonData);
+  const [hotelList, setHotelList] = useState([]);
   const [locations, setLocations] = useState([]);
-  const [filterResults, setFilterResults] = useState(hotelList);
+  const [filterResults, setFilterResults] = useState([]);
   const [locationFilter, setLocationFilter] = useState("");
   const [showAvailableOnly, setShowAvailableOnly] = useState(false);
 
   useEffect(() => {
-    let newHotelList = hotelList;
-    hotelList.forEach((hotel) => {
+    let newHotelList = jsonData;
+    newHotelList.forEach((hotel) => {
       if (!hotel.country) {
         hotel.country = countries[hotel.countryCode].name;
       }

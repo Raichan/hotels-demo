@@ -28,14 +28,6 @@ const useStyles = makeStyles((theme) => ({
 const HotelInfo = ({ hotel, showReserveButton }) => {
   const classes = useStyles();
 
-  const handleImageUrl = (url) => {
-    let newUrl = url;
-    if (url[0] === ".") {
-      newUrl = newUrl.slice(1);
-    }
-    return newUrl;
-  };
-
   const ReserveButton = () => {
     return (
       <Button component={Link} to={`/reserve/${hotel.id}`}>
@@ -44,14 +36,11 @@ const HotelInfo = ({ hotel, showReserveButton }) => {
     );
   };
 
-  return (
-    <Card>
+  const Hotel = () => {
+    return (
       <Grid container>
         <Grid item>
-          <CardMedia
-            image={handleImageUrl(hotel.imageUrl)}
-            className={classes.hotelImage}
-          />
+          <CardMedia image={hotel.imageUrl} className={classes.hotelImage} />
         </Grid>
         <Grid item className={classes.hotelInfoLeft}>
           <Typography variant="body1">{hotel.name}</Typography>
@@ -81,8 +70,11 @@ const HotelInfo = ({ hotel, showReserveButton }) => {
           <Grid item>{showReserveButton ? <ReserveButton /> : ""}</Grid>
         </Grid>
       </Grid>
-    </Card>
-  );
+    );
+  };
+
+  // Only show card content after data has been loaded
+  return <Card>{Object.keys(hotel).length !== 0 ? <Hotel /> : ""}</Card>;
 };
 
 export default HotelInfo;
