@@ -61,6 +61,8 @@ const Reserve = ({ match }) => {
           <br />
           Name: {sentData.name}
           <br />
+          Email: {sentData.email}
+          <br />
           Telephone: {sentData.telephone}
           <br />
           Date of arrival: {sentData.arrival}

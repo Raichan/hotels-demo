@@ -25,6 +25,7 @@ const ReservationForm = ({ updateSentData }) => {
   const formik = useFormik({
     initialValues: {
       name: "",
+      email: "",
       telephone: "",
       arrival: format(startOfToday(), "yyyy-MM-dd"),
       departure: format(startOfTomorrow(), "yyyy-MM-dd"),
@@ -34,6 +35,9 @@ const ReservationForm = ({ updateSentData }) => {
       const errors = {};
       if (!values.name) {
         errors.name = "Name is required.";
+      }
+      if (!values.email) {
+        errors.email = "Email is required.";
       }
       if (!values.telephone) {
         errors.telephone = "Telephone is required.";
@@ -67,7 +71,16 @@ const ReservationForm = ({ updateSentData }) => {
           helperText={formik.touched.name && formik.errors.name}
         />
       </FormControl>
-      <br />
+      <FormControl fullWidth margin="dense">
+        <TextField
+          id="email"
+          label="Email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
+        />
+      </FormControl>
       <FormControl fullWidth margin="dense">
         <TextField
           id="telephone"
@@ -78,7 +91,6 @@ const ReservationForm = ({ updateSentData }) => {
           helperText={formik.touched.telephone && formik.errors.telephone}
         />
       </FormControl>
-      <br />
       <FormControl fullWidth>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
@@ -103,7 +115,6 @@ const ReservationForm = ({ updateSentData }) => {
           />
         </MuiPickersUtilsProvider>
       </FormControl>
-      <br />
       <FormControl fullWidth>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
@@ -128,7 +139,6 @@ const ReservationForm = ({ updateSentData }) => {
           />
         </MuiPickersUtilsProvider>
       </FormControl>
-      <br />
       <FormControlLabel
         value={formik.values.newsletter}
         onChange={() =>
