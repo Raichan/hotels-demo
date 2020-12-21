@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { countries } from "country-data";
 import {
-  InputLabel,
-  Select,
-  MenuItem,
-  FormControlLabel,
   Checkbox,
+  FormControlLabel,
+  InputLabel,
+  MenuItem,
+  Select,
   Typography,
 } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import HotelInfo from "./HotelInfo.js";
 import jsonData from "../hotels.json";
-import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   locationFilter: {

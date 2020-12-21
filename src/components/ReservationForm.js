@@ -1,18 +1,5 @@
 import React from "react";
-import {
-  FormControlLabel,
-  Checkbox,
-  Button,
-  FormControl,
-  TextField,
-  Typography,
-} from "@material-ui/core";
-import { useFormik } from "formik";
 import DateFnsUtils from "@date-io/date-fns";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
 import {
   startOfToday,
   startOfTomorrow,
@@ -20,6 +7,19 @@ import {
   isValid,
   parseISO,
 } from "date-fns";
+import { useFormik } from "formik";
+import {
+  Button,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
 
 const ReservationForm = ({ updateSentData }) => {
   const formik = useFormik({

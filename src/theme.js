@@ -23,9 +23,59 @@ const theme = createMuiTheme({
         borderRadius: 30,
       },
     },
-    MuiMenuItem: {
+    MuiMenu: {
+      list: {
+        border: "1px solid #5bb326",
+      },
+    },
+    MuiSelect: {
+      icon: {
+        color: green[500],
+      },
+      select: {
+        "&:focus": {
+          backgroundColor: "#e6fcd3",
+        },
+      },
+    },
+    MuiInput: {
+      underline: {
+        "&:hover": {
+          "&:not(.Mui-disabled)": {
+            "&:before": {
+              borderBottom: "2px solid " + green[500],
+            },
+          },
+        },
+      },
+    },
+    MuiCheckbox: {
+      root: {
+        color: green[500],
+      },
+    },
+    MuiListItem: {
       root: {
         height: "36px",
+        "&$selected": {
+          backgroundColor: "#d7f8bc",
+          "&:hover": {
+            backgroundColor: "#d7f8bc",
+          },
+          "&:active": {
+            backgroundColor: "#5bb326",
+            color: "#d7f8bc",
+          },
+        },
+      },
+      button: {
+        "&:hover": {
+          backgroundColor: "#e6fcd3",
+        },
+        "&:active": {
+          backgroundColor: "#5bb326",
+          color: "#d7f8bc",
+        },
       },
     },
     MuiInputBase: {
@@ -35,6 +85,9 @@ const theme = createMuiTheme({
     },
   },
   props: {
+    MuiPaper: {
+      elevation: 8,
+    },
     MuiCard: {
       elevation: 0,
     },

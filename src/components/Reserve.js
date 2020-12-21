@@ -1,12 +1,12 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { countries } from "country-data";
+import { Card, Typography, Button } from "@material-ui/core";
+import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
+import { makeStyles } from "@material-ui/core/styles";
 import HotelInfo from "./HotelInfo.js";
 import ReservationForm from "./ReservationForm.js";
 import jsonData from "../hotels.json";
-import { makeStyles } from "@material-ui/core/styles";
-import { Card, Typography, Button } from "@material-ui/core";
-import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 
 const useStyles = makeStyles(() => ({
   reservationForm: {
@@ -74,6 +74,14 @@ const Reserve = ({ match }) => {
     );
   };
 
+  const HotelNotFound = () => {
+    return (
+      <Card className={classes.bottomMargin}>
+        <Typography variant="body1">Hotel not found.</Typography>
+      </Card>
+    );
+  };
+
   return (
     <main>
       {hotel ? (
@@ -84,7 +92,7 @@ const Reserve = ({ match }) => {
           </Card>
         </Fragment>
       ) : (
-        <Card className={classes.bottomMargin}>Hotel not found.</Card>
+        <HotelNotFound />
       )}
 
       {sentData ? <Confirmation /> : ""}

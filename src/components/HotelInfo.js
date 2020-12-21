@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import NumberFormat from "react-number-format";
 import { Button, Card, CardMedia, Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import NumberFormat from "react-number-format";
 
 const useStyles = makeStyles((theme) => ({
   hotelImage: {
