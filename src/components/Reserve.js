@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { countries } from "country-data";
 import HotelInfo from "./HotelInfo.js";
 import ReservationForm from "./ReservationForm.js";
 import jsonData from "../hotels.json";
 import { makeStyles } from "@material-ui/core/styles";
-import { Card, Typography } from "@material-ui/core";
+import { Card, Typography, Button } from "@material-ui/core";
+import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 
 const useStyles = makeStyles(() => ({
   reservationForm: {
@@ -12,6 +14,16 @@ const useStyles = makeStyles(() => ({
   },
   successInfo: {
     backgroundColor: "#e1ffe8",
+    marginBottom: "10px",
+  },
+  bottomMargin: {
+    marginBottom: "10px",
+  },
+  backButton: {
+    marginLeft: "10px",
+  },
+  backIcon: {
+    paddingRight: "5px",
   },
 }));
 
@@ -34,6 +46,8 @@ const Reserve = ({ match }) => {
         newHotel.imageUrl = newHotel.imageUrl.slice(1);
       }
       setHotel(newHotel);
+    } else {
+      setHotel(null);
     }
   }, [match.params.id]);
 
@@ -61,15 +75,35 @@ const Reserve = ({ match }) => {
     );
   };
 
+  const ReservePage = () => {
+    return (
+      <div>
+        <HotelInfo hotel={hotel} showReserveButton={false} />
+
+        <Card className={classes.reservationForm}>
+          <ReservationForm updateSentData={updateSentData} />
+        </Card>
+
+        {sentData ? <Confirmation /> : ""}
+      </div>
+    );
+  };
+
+  const HotelNotFound = () => {
+    return <Card className={classes.bottomMargin}>Hotel not found.</Card>;
+  };
+
   return (
     <main>
-      <HotelInfo hotel={hotel} showReserveButton={false} />
-
-      <Card className={classes.reservationForm}>
-        <ReservationForm updateSentData={updateSentData} />
-      </Card>
-
-      {sentData ? <Confirmation /> : ""}
+      {hotel ? <ReservePage /> : <HotelNotFound />}
+      <Button
+        variant="outlined"
+        component={Link}
+        to={"/"}
+        className={classes.backButton}
+      >
+        <KeyboardBackspaceIcon className={classes.backIcon} /> Back
+      </Button>
     </main>
   );
 };
