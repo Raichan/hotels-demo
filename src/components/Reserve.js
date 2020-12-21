@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { countries } from "country-data";
 import HotelInfo from "./HotelInfo.js";
@@ -14,7 +14,6 @@ const useStyles = makeStyles(() => ({
   },
   successInfo: {
     backgroundColor: "#e1ffe8",
-    marginBottom: "10px",
   },
   bottomMargin: {
     marginBottom: "10px",
@@ -53,7 +52,7 @@ const Reserve = ({ match }) => {
 
   const Confirmation = () => {
     return (
-      <Card className={classes.successInfo}>
+      <Card className={`${classes.successInfo} ${classes.bottomMargin}`}>
         <Typography variant="body1" gutterBottom>
           Hotel reserved successfully!
         </Typography>
@@ -75,27 +74,21 @@ const Reserve = ({ match }) => {
     );
   };
 
-  const ReservePage = () => {
-    return (
-      <div>
-        <HotelInfo hotel={hotel} showReserveButton={false} />
-
-        <Card className={classes.reservationForm}>
-          <ReservationForm updateSentData={updateSentData} />
-        </Card>
-
-        {sentData ? <Confirmation /> : ""}
-      </div>
-    );
-  };
-
-  const HotelNotFound = () => {
-    return <Card className={classes.bottomMargin}>Hotel not found.</Card>;
-  };
-
   return (
     <main>
-      {hotel ? <ReservePage /> : <HotelNotFound />}
+      {hotel ? (
+        <Fragment>
+          <HotelInfo hotel={hotel} showReserveButton={false} />
+          <Card className={classes.reservationForm}>
+            <ReservationForm updateSentData={updateSentData} />
+          </Card>
+        </Fragment>
+      ) : (
+        <Card className={classes.bottomMargin}>Hotel not found.</Card>
+      )}
+
+      {sentData ? <Confirmation /> : ""}
+
       <Button
         variant="outlined"
         component={Link}
