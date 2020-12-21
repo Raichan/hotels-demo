@@ -192,7 +192,9 @@ const Reserve = ({ match }) => {
           <br />
           <FormControlLabel
             value={formik.values.newsletter}
-            onChange={formik.handleChange}
+            onChange={() =>
+              formik.setFieldValue("newsletter", !formik.values.newsletter)
+            }
             control={<Checkbox color="primary" />}
             label={
               <Typography variant="body2">
